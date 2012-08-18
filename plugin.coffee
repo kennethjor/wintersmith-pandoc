@@ -48,10 +48,12 @@ module.exports = (wintersmith, callback) ->
     getHtml: (base) ->
       # TODO: cleaner way to achieve this?
       # http://stackoverflow.com/a/4890350
-      @_html = @_htmlraw.replace(/(<(a|img)[^>]+(href|src)=")(?!http|\/)([^"]+)/g, '$1' + @getLocation(base) + '$4')
+      # replace all relative links, except for links within the page
+      # (which start with #)
+      @_html = @_htmlraw.replace(/(<(a|img)[^>]+(href|src)=")(?!http|\/|\#)([^"]+)/g, '$1' + @getLocation(base) + '$4')
       # handles non-relative links within the site (e.g. /about)
       if base
-        @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base + '/$4')
+        @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/(?!\#)([^"]+)/g, '$1' + base + '/$4')
       return @_html
     
     getIntro: (base) ->
