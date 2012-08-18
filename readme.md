@@ -4,7 +4,7 @@
 
 ### install:
 
-`git clone ... node_modules/pandoc
+    npm install git+https://github.com/lhagan/wintersmith-pandoc.git
   
 then add `./node_modules/wintersmith-pandoc/` to `config.json` like:
 
