@@ -1,0 +1,11 @@
+!!! 5
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title= locals.title
+    link(rel='stylesheet', href='style.css')
+    link(rel='stylesheet', href='syntax.css')
+    script(src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
+  body
+    h1= page.title
+    != page.html

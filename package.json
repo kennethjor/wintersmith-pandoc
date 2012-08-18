@@ -1,0 +1,13 @@
+{
+  "name": "wintersmith-pandoc",
+  "version": "0.1.0",
+  "author": "Luke Hagan <lukehagan.com>",
+  "description": "pandoc plugin for wintersmith",
+  "license": "MIT",
+  "dependencies": {
+    "pdc": ">= 0.1.x",
+    "async": ">= 0.1.x",
+    "coffee-script": "1.2.x",
+    "jsdom": "0.2.x"
+  }
+}
