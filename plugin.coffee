@@ -49,8 +49,9 @@ module.exports = (wintersmith, callback) ->
       # TODO: cleaner way to achieve this?
       # http://stackoverflow.com/a/4890350
       name = @getFilename()
+      name = name[name.lastIndexOf('/')+1..]
       loc = @getLocation(base)
-      fullName = loc + name[name.lastIndexOf('/')+1..]
+      fullName = if name is 'index.html' then loc else loc + name
       # handle links to anchors within the page
       @_html = @_htmlraw.replace(/(<(a|img)[^>]+(href|src)=")(#[^"]+)/g, '$1' + fullName + '$4')
       # handle relative links
