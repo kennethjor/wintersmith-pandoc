@@ -35,11 +35,19 @@ extractMetadata = (content, callback) ->
     markdown: (callback) ->
       callback null, content.slice(split_idx + 2)
   , callback
-
-pandocRender = (page, callback) ->  
+  
+q = async.queue((page, callback) ->
   pandoc page._content, 'markdown', 'html', ['--smart', '--mathjax'], (err, result) ->
     page._htmlraw = result
     callback null, page
+, 2)
+
+pandocRender = (page, callback) ->
+  q.push page, (err, page) ->
+    if err
+      console.log err
+    else
+      callback null, page
 
 module.exports = (wintersmith, callback) ->
 
