@@ -7,7 +7,6 @@
   "dependencies": {
     "pdc": ">= 0.1.x",
     "async": ">= 0.1.x",
-    "coffee-script": "1.2.x",
-    "jsdom": "0.2.x"
+    "coffee-script": "1.2.x"
   }
 }
