@@ -100,6 +100,6 @@ module.exports = (wintersmith, callback) ->
         callback null, page
     ], callback
    
-  wintersmith.registerContentPlugin 'pages', '**/*.*(markdown|md)', PandocPage
+  wintersmith.registerContentPlugin 'pages', '**/*.*(markdown|mkd|md)', PandocPage
 
   callback()
