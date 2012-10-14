@@ -83,6 +83,12 @@ module.exports = (wintersmith, callback) ->
       else
         @_intro = @_html
       return @_intro
+      
+    @property 'hasMore', ->
+      @_html ?= @getHtml()
+      @_intro ?= @getIntro()
+      @_hasMore ?= (@_html.length > @_intro.length)
+      return @_hasMore
   
   PandocPage.fromFile = (filename, base, callback) ->
     async.waterfall [
