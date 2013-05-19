@@ -1,6 +1,7 @@
+---
 title: Wintersmith Pandoc
 template: index.jade
-
+---
 
 Headers
 -------
