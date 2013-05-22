@@ -4,6 +4,12 @@ fs = require 'fs'
 path = require 'path'
 url = require 'url'
 
+q = async.queue((page, callback) ->
+  pandoc page._content, 'markdown', 'html', ['--smart', '--mathjax'], (err, result) ->
+    page._htmlraw = result
+    callback null, page
+, 2)
+
 pandocRender = (page, callback) ->
   q.push page, (err, page) ->
     if err
