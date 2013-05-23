@@ -5,7 +5,7 @@ path = require 'path'
 url = require 'url'
 
 q = async.queue((page, callback) ->
-  pandoc page._content, 'markdown', 'html', ['--smart', '--mathjax'], (err, result) ->
+  pandoc page.markdown, 'markdown', 'html', ['--smart', '--mathjax'], (err, result) ->
     page._htmlraw = result
     callback null, page
 , 2)
@@ -16,12 +16,12 @@ pandocRender = (page, callback) ->
       console.log err
     else
       callback null, page
+      
+module.exports = (env, callback) ->
 
-module.exports = (wintersmith, callback) ->
-
-  class PandocPage extends wintersmith.defaultPlugins.MarkdownPage
-    
-    getHtml: (base) ->
+  class PandocPage extends env.plugins.MarkdownPage
+  
+    getHtml: (base=env.config.baseUrl) ->
       # TODO: cleaner way to achieve this?
       # http://stackoverflow.com/a/4890350
       name = @getFilename()
@@ -36,8 +36,8 @@ module.exports = (wintersmith, callback) ->
       if base
         @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base + '/$4')
       return @_html
-    
-    getIntro: (base) ->
+  
+    getIntro: (base=env.config.baseUrl) ->
       @_html = @getHtml(base)
       idx = ~@_html.indexOf('<span class="more') or ~@_html.indexOf('<h2') or ~@_html.indexOf('<hr')
       # TODO: simplify!
@@ -51,29 +51,29 @@ module.exports = (wintersmith, callback) ->
       else
         @_intro = @_html
       return @_intro
-      
+    
     @property 'hasMore', ->
       @_html ?= @getHtml()
       @_intro ?= @getIntro()
       @_hasMore ?= (@_html.length > @_intro.length)
       return @_hasMore
-  
-  PandocPage.fromFile = (filename, base, callback) ->
+
+  PandocPage.fromFile = (filepath, callback) ->
     async.waterfall [
       (callback) ->
-        fs.readFile path.join(base, filename), callback
+        fs.readFile filepath.full, callback
       (buffer, callback) ->
-        wintersmith.defaultPlugins.MarkdownPage.extractMetadata buffer.toString(), callback
+        env.plugins.MarkdownPage.extractMetadata buffer.toString(), callback
       (result, callback) =>
         {markdown, metadata} = result
-        page = new this filename, markdown, metadata
+        page = new this filepath, metadata, markdown
         callback null, page
       (page, callback) =>
         pandocRender page, callback
       (page, callback) =>
         callback null, page
     ], callback
-   
-  wintersmith.registerContentPlugin 'pages', '**/*.*(markdown|mkd|md)', PandocPage
+ 
+  env.registerContentPlugin 'pages', '**/*.*(markdown|mkd|md)', PandocPage
 
   callback()
