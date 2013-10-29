@@ -34,7 +34,10 @@ module.exports = (env, callback) ->
       @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")(?!http|\/)([^"]+)/g, '$1' + loc + '$4')
       # handles non-relative links within the site (e.g. /about)
       if base
-        @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base + '/$4')
+        # avoid double '//' entries: remove base if it is equal to '/'
+        base_adj = if base == '/' then '' else base
+        # adjust non-relative links so they use this site's base
+        @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base_adj + '/$4')
       return @_html
   
     getIntro: (base=env.config.baseUrl) ->
