@@ -18,7 +18,7 @@ This is **bold** and this is _italic_.
 Links
 -----
 
-This is a simple inline link <http://jnordberg.github.com/wintersmith/> (extra?), [regular inline link](http://nodejs.org), and [another with alt text](http://coffeescript.org "Coffeescript"). Also, a [reference style][my_reference_link] link and implicit reference link to [Daring Fireball][].
+This is a simple inline link <http://jnordberg.github.com/wintersmith/> (extra?), [regular inline link](http://nodejs.org), and [another with alt text](http://coffeescript.org "Coffeescript"). Also, a [reference style][my_reference_link] link and implicit reference link to [Daring Fireball][]. Finally, here's a [local link](/about/).
 
 [my_reference_link]: http://johnmacfarlane.net/pandoc/README.html "Pandoc: a universal document converter"
 [Daring Fireball]: http://daringfireball.net/
