@@ -80,9 +80,11 @@ math = {
 
 Images
 ------
-![with optional caption](http://jnordberg.github.com/wintersmith/img/wintersmith.svg "Wintersmith logo")
+![with optional caption](http://wintersmith.io/images/wintersmith.svg "Wintersmith logo")
 
 A ![resize icon][resize_icon] reference style image with alt text.
+
+A local image: ![other image](arrow@2x.png)
 
 [resize_icon]: https://github.com/favicon.ico "GitHub"
 
