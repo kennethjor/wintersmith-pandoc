@@ -7,7 +7,7 @@ url = require 'url'
 q = async.queue((page, callback) ->
   pandoc page.markdown, 'markdown', 'html', ['--smart', '--mathjax'], (err, result) ->
     page._htmlraw = result
-    callback null, page
+    callback err, page
 , 2)
 
 pandocRender = (page, callback) ->
