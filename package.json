@@ -1,12 +1,29 @@
 {
   "name": "wintersmith-pandoc",
-  "version": "0.2.2",
-  "author": "Luke Hagan <lukehagan.com>",
-  "description": "pandoc plugin for wintersmith",
+  "version": "0.2.3",
+  "description": "Pandoc plugin for Wintersmith",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kennethjor/wintersmith-pandoc.git"
+  },
+  "keywords": [
+    "wintersmith",
+    "wintersmith-plugin",
+    "pandoc"
+  ],
+  "contributors": [
+    "Luke Hagan (http://lukehagan.com)",
+    "Kenneth Jørgensen <kenneth@kennethjorgensen.com> (http://kennethjorgensen.com)"
+  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kennethjor/wintersmith-pandoc/issues"
+  },
+  "homepage": "https://github.com/kennethjor/wintersmith-pandoc",
   "dependencies": {
-    "pdc": "0.2.x",
-    "async": "0.9.x",
-    "coffee-script": "1.9.x"
+    "async": "^0.9.0",
+    "coffee-script": "^1.9.1",
+    "pdc": "^0.2.2"
   }
 }
