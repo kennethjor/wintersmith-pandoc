@@ -22,6 +22,8 @@ module.exports = (env, callback) ->
       # TODO: cleaner way to achieve this?
       # http://stackoverflow.com/a/4890350
       name = @getFilename()
+      # make sure there are no Windows-style slashes in the name
+      name = name.replace(/\\/g, '/')
       name = name[name.lastIndexOf('/')+1..]
       loc = @getLocation(base)
       fullName = if name is 'index.html' then loc else loc + name
