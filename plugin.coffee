@@ -26,14 +26,14 @@ module.exports = (env, callback) ->
 			fullName = if name is 'index.html' then loc else loc + name
 			# handle links to anchors within the page
 			@_html = @_htmlraw.replace(/(<(a|img)[^>]+(href|src)=")(#[^"]+)/g, '$1' + fullName + '$4')
-			# handle relative links
-			@_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")(?!http|\/)([^"]+)/g, '$1' + loc + '$4')
 			# handles non-relative links within the site (e.g. /about)
 			if base
 				# avoid double '//' entries: remove all tailing '/'-es
 				base_adj = base.replace(/[\/]+$/, '')
 				# adjust non-relative links so they use this site's base
-				@_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base_adj + '/$4')
+				@_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base_adj + '/$4')			
+			# handle relative links
+			@_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")(?!http|\/)([^"]+)/g, '$1' + loc + '$4')
 			return @_html
 
 		getIntro: (base = env.config.baseUrl) ->
